@@ -41,6 +41,43 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+# Quantum Vista
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+**Accelerate Your Digital Growth**
+
+Quantum Vista bridges the gap between technology and your audience. We build custom software that powers your business and execute marketing strategies that define your brand.
+
+## About This Repository
+
+This repository contains the source code and assets for the official Quantum Vista website ([quantumvista.uk](https://quantumvista.uk)). The site showcases our services, portfolio, client testimonials, and a proven process for scaling digital businesses.
+
+## Services Highlighted
+
+- **Custom Software Solutions** – Tailored web apps & backend systems
+- **Website Development** – Fast, scalable, conversion-focused sites
+- **App Development** – Native & cross-platform mobile apps
+- **Social Media Marketing** – Organic growth & community management
+- **SEO** – High-intent organic traffic strategies
+- **Search Engine Marketing (PPC)** – Targeted paid search campaigns
+- **Email Marketing** – Automated, personalized lead nurturing
+
+## Key Stats (as reflected on site)
+
+- 45+ Projects Delivered
+- 98% Client Retention
+- 2M+ Lines of Code
+- 5M+ Social Reach
+
+## Process
+
+1. Discovery & Strategy
+2. Design & Architecture
+3. Development & Execution
+4. Growth & Marketing
+
+## Contact
+
+Interested in transforming your digital presence? Visit [quantumvista.uk](https://quantumvista.uk) or request a free consultation via the site.
+
+---
+© Quantum Vista. All rights reserved.
