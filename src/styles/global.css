@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #4f46e5;
+    --font-sans: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}

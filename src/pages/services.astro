@@ -1,0 +1,199 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+
+const services = [
+  {
+    id: "website-development",
+    title: "Website Development",
+    subtitle: "Blazing fast, highly scalable, and conversion-optimized.",
+    description: "We don't just build websites; we build digital experiences. Our web solutions are engineered to perfectly balance aesthetics with performance, ensuring your users stay engaged and convert.",
+    icon: `<svg class="w-10 h-10 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>`,
+    color: "blue",
+    process: [
+      { step: "01", name: "Discovery", desc: "Understanding your brand, audience, and technical needs." },
+      { step: "02", name: "UI/UX Design", desc: "Crafting wireframes and high-fidelity interactive prototypes." },
+      { step: "03", name: "Development", desc: "Writing clean, modular code using cutting-edge frameworks." },
+      { step: "04", name: "Launch", desc: "Rigorous QA testing, final optimizations, and deployment." }
+    ],
+    tech: ["React", "Astro", "Tailwind CSS", "Node.js"]
+  },
+  {
+    id: "app-development",
+    title: "App Development",
+    subtitle: "Native and cross-platform mobile solutions.",
+    description: "Put your business directly into the pockets of your customers. We develop robust, intuitive, and feature-rich mobile applications for both iOS and Android ecosystems.",
+    icon: `<svg class="w-10 h-10 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>`,
+    color: "indigo",
+    process: [
+      { step: "01", name: "Architecture", desc: "Mapping out data flow, APIs, and scalable backend infrastructure." },
+      { step: "02", name: "Prototyping", desc: "Designing seamless touch-friendly interfaces and navigation." },
+      { step: "03", name: "Engineering", desc: "Agile code sprints for iOS and Android platforms." },
+      { step: "04", name: "App Store", desc: "Navigating Apple and Google submission guidelines for release." }
+    ],
+    tech: ["Swift", "Kotlin", "React Native", "Flutter"]
+  },
+  {
+    id: "social-media-marketing",
+    title: "Social Media Marketing",
+    subtitle: "Build a community, ignite your brand.",
+    description: "Organic growth requires authentic engagement. We manage your presence across all major platforms, creating compelling content that resonates with your target demographic.",
+    icon: `<svg class="w-10 h-10 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>`,
+    color: "pink",
+    process: [
+      { step: "01", name: "Audit", desc: "Analyzing your current social footprint and competitor landscape." },
+      { step: "02", name: "Content Strategy", desc: "Developing a content calendar aligned with your brand voice." },
+      { step: "03", name: "Execution", desc: "Designing posts, writing copy, and actively engaging with followers." },
+      { step: "04", name: "Analytics", desc: "Tracking growth, reach, and engagement metrics to refine strategy." }
+    ],
+    tech: ["Instagram", "LinkedIn", "TikTok", "X (Twitter)"]
+  },
+  {
+    id: "seo",
+    title: "Search Engine Optimization (SEO)",
+    subtitle: "Dominate search engine results naturally.",
+    description: "If they can't find you, you don't exist. Our SEO specialists employ white-hat techniques to drive sustainable, high-intent organic traffic to your digital storefront.",
+    icon: `<svg class="w-10 h-10 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>`,
+    color: "emerald",
+    process: [
+      { step: "01", name: "Keyword Research", desc: "Identifying high-volume, low-competition target phrases." },
+      { step: "02", name: "On-Page Setup", desc: "Optimizing metadata, headers, load speed, and core web vitals." },
+      { step: "03", name: "Content Creation", desc: "Publishing authoritative blogs and articles to hub relevance." },
+      { step: "04", name: "Link Building", desc: "Acquiring high-quality backlinks to boost domain authority." }
+    ],
+    tech: ["Ahrefs", "SEMrush", "Google Search Console", "Screaming Frog"]
+  },
+  {
+    id: "sem",
+    title: "Search Engine Marketing (SEM)",
+    subtitle: "Immediate visibility, maximized ROI.",
+    description: "Skip the line and capture users exactly when they are searching for your services. We build highly targeted PPC campaigns that minimize waste and maximize conversions.",
+    icon: `<svg class="w-10 h-10 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" /></svg>`,
+    color: "orange",
+    process: [
+      { step: "01", name: "Market Analysis", desc: "Analyzing search intent and competitor bidding strategies." },
+      { step: "02", name: "Ad Creation", desc: "Drafting compelling copy and designing tailored landing pages." },
+      { step: "03", name: "Campaign Setup", desc: "Configuring tight geographic and demographic targeting parameters." },
+      { step: "04", name: "Optimization", desc: "Continually adjusting bids and pausing underperforming assets." }
+    ],
+    tech: ["Google Ads", "Bing Ads", "Google Analytics", "Looker Studio"]
+  },
+  {
+    id: "email-marketing",
+    title: "Email Marketing",
+    subtitle: "Nurture leads into loyal customers.",
+    description: "Your most direct line to your audience. We design beautiful, personalized email automation workflows that build trust over time and drive repeat business.",
+    icon: `<svg class="w-10 h-10 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>`,
+    color: "yellow",
+    process: [
+      { step: "01", name: "List Building", desc: "Implementing lead magnets and subscription strategies." },
+      { step: "02", name: "Segmentation", desc: "Dividing your audience based on behavior and preferences." },
+      { step: "03", name: "Automation", desc: "Setting up drip campaigns, abandoned cart, and welcome series." },
+      { step: "04", name: "A/B Testing", desc: "Experimenting with subject lines and layouts to boost open rates." }
+    ],
+    tech: ["Mailchimp", "Klaviyo", "HubSpot", "ActiveCampaign"]
+  }
+];
+
+// Helper for dynamic borders based on color string
+const getBorderColor = (color: string) => {
+  const map: Record<string, string> = {
+    blue: 'border-blue-500/30',
+    indigo: 'border-indigo-500/30',
+    pink: 'border-pink-500/30',
+    emerald: 'border-emerald-500/30',
+    orange: 'border-orange-500/30',
+    yellow: 'border-yellow-500/30'
+  };
+  return map[color] || 'border-gray-800';
+};
+---
+
+<Layout title="Our Services - Quantum Vista">
+  <!-- Hero Section -->
+  <section class="pt-40 pb-20 bg-gray-950 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('/stardust.png')] opacity-20"></div>
+    <div class="absolute -top-40 -right-40 w-[40rem] h-[40rem] bg-indigo-500 rounded-full blur-[120px] opacity-20"></div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6">
+        Our <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Expertise</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+        We bridge the gap between imagination and reality through cutting-edge software and results-driven marketing.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Detailed Listing -->
+  <section class="py-12 bg-gray-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-32">
+      
+      {services.map((service, index) => (
+        <div id={service.id} class={`flex flex-col lg:flex-row gap-16 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+          
+          <!-- Image / Visual Side -->
+          <div class="w-full lg:w-1/2">
+            <div class={`relative rounded-3xl border ${getBorderColor(service.color)} bg-gray-900/50 p-8 md:p-12 overflow-hidden group`}>
+              <!-- Glow effect behind icon -->
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-current opacity-5 rounded-full blur-3xl transform group-hover:scale-125 transition-transform duration-700" style={`color: var(--color-${service.color}-500, #indigo)`}></div>
+              
+              <div class="w-20 h-20 rounded-2xl bg-gray-800 flex items-center justify-center mb-8 shadow-xl border border-gray-700 relative z-10" set:html={service.icon} />
+              
+              <h3 class="text-3xl md:text-4xl font-bold text-white mb-4 relative z-10">{service.title}</h3>
+              <p class="text-xl text-indigo-300 font-medium mb-6 relative z-10">{service.subtitle}</p>
+              <p class="text-slate-400 leading-relaxed text-lg mb-8 relative z-10">{service.description}</p>
+              
+              <!-- Tech Stack Tags -->
+              <div class="relative z-10">
+                <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Technologies We Use</h4>
+                <div class="flex flex-wrap gap-2">
+                  {service.tech.map(t => (
+                    <span class="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs font-semibold text-slate-300">{t}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Process Side -->
+          <div class="w-full lg:w-1/2">
+            <h4 class="text-sm font-bold text-indigo-500 uppercase tracking-widest mb-8 flex items-center gap-4">
+              <span class="w-12 h-px bg-indigo-500"></span>
+              Our Process
+            </h4>
+            
+            <div class="space-y-8 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-800 before:to-transparent hidden-before-xs">
+              
+              {service.process.map((proc, i) => (
+                <div class="relative flex items-start gap-6">
+                  <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gray-900 border border-gray-700 flex items-center justify-center text-sm font-bold text-white shadow-lg z-10">
+                    {proc.step}
+                  </div>
+                  <div class="pt-2">
+                    <h5 class="text-xl font-bold text-white mb-2">{proc.name}</h5>
+                    <p class="text-slate-400 leading-relaxed">{proc.desc}</p>
+                  </div>
+                </div>
+              ))}
+              
+            </div>
+          </div>
+          
+        </div>
+      ))}
+
+    </div>
+  </section>
+
+  <!-- Include CTA Component -->
+  <Cta />
+
+</Layout>
+
+<style>
+  @media (max-width: 768px) {
+    .hidden-before-xs::before {
+      display: none;
+    }
+  }
+</style>

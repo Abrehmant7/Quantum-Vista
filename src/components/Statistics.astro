@@ -1,0 +1,38 @@
+---
+const stats = [
+    { label: "Projects Delivered", value: "45+" },
+    { label: "Client Retention", value: "98%" },
+    { label: "Lines of Code", value: "2M+" },
+    { label: "Social Reach", value: "5M+" },
+];
+---
+
+<section class="py-20 relative overflow-hidden">
+    <!-- Dynamic Background elements -->
+    <div class="absolute inset-0 bg-indigo-950"></div>
+    <div
+        class="absolute inset-0 bg-gradient-to-br from-indigo-900/90 via-slate-900/90 to-purple-900/90 mix-blend-multiply"
+    >
+    </div>
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div
+            class="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8 text-center divide-x divide-indigo-800/30"
+        >
+            {
+                stats.map((stat, i) => (
+                    <div
+                        class={`flex flex-col items-center justify-center px-4 ${i % 2 === 0 ? "border-none md:border-l md:first:border-none" : "border-l md:border-l"}`}
+                    >
+                        <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] mb-2">
+                            {stat.value}
+                        </div>
+                        <div class="text-indigo-300 text-xs sm:text-sm font-semibold uppercase tracking-widest mt-1">
+                            {stat.label}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
