@@ -132,12 +132,15 @@ const getBorderColor = (color: string) => {
         <div id={service.id} class={`flex flex-col lg:flex-row gap-16 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
           
           <!-- Image / Visual Side -->
-          <div class="w-full lg:w-1/2">
-            <div class={`relative rounded-3xl border ${getBorderColor(service.color)} bg-gray-900/50 p-8 md:p-12 overflow-hidden group`}>
+          <div
+            class={`w-full lg:w-1/2 reveal-on-scroll ${index % 2 !== 0 ? 'reveal-from-right' : 'reveal-from-left'}`}
+            style={`--reveal-delay: ${index * 70}ms;`}
+          >
+            <div class={`service-feature-card relative rounded-3xl border ${getBorderColor(service.color)} bg-gray-900/50 p-8 md:p-12 overflow-hidden group`}>
               <!-- Glow effect behind icon -->
               <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-current opacity-5 rounded-full blur-3xl transform group-hover:scale-125 transition-transform duration-700" style={`color: var(--color-${service.color}-500, #indigo)`}></div>
               
-              <div class="w-20 h-20 rounded-2xl bg-gray-800 flex items-center justify-center mb-8 shadow-xl border border-gray-700 relative z-10" set:html={service.icon} />
+              <div class="service-icon-orbit w-20 h-20 rounded-2xl bg-gray-800 flex items-center justify-center mb-8 shadow-xl border border-gray-700 relative z-10" set:html={service.icon} />
               
               <h3 class="text-3xl md:text-4xl font-bold text-white mb-4 relative z-10">{service.title}</h3>
               <p class="text-xl text-indigo-300 font-medium mb-6 relative z-10">{service.subtitle}</p>
@@ -152,11 +155,22 @@ const getBorderColor = (color: string) => {
                   ))}
                 </div>
               </div>
+
+              <a
+                href={`/services/${service.id}`}
+                class="relative z-10 mt-8 inline-flex items-center rounded-md bg-indigo-600 px-5 py-3 text-sm font-bold text-white hover:bg-indigo-500 transition-colors"
+              >
+                View Full Service
+                <span class="ml-2" aria-hidden="true">&rarr;</span>
+              </a>
             </div>
           </div>
 
           <!-- Process Side -->
-          <div class="w-full lg:w-1/2">
+          <div
+            class={`w-full lg:w-1/2 reveal-on-scroll ${index % 2 !== 0 ? 'reveal-from-left' : 'reveal-from-right'}`}
+            style={`--reveal-delay: ${index * 70 + 140}ms;`}
+          >
             <h4 class="text-sm font-bold text-indigo-500 uppercase tracking-widest mb-8 flex items-center gap-4">
               <span class="w-12 h-px bg-indigo-500"></span>
               Our Process
@@ -165,7 +179,7 @@ const getBorderColor = (color: string) => {
             <div class="space-y-8 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-800 before:to-transparent hidden-before-xs">
               
               {service.process.map((proc, i) => (
-                <div class="relative flex items-start gap-6">
+                <div class="service-process-step relative flex items-start gap-6" style={`--step-delay: ${i * 100}ms;`}>
                   <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gray-900 border border-gray-700 flex items-center justify-center text-sm font-bold text-white shadow-lg z-10">
                     {proc.step}
                   </div>
@@ -191,9 +205,83 @@ const getBorderColor = (color: string) => {
 </Layout>
 
 <style>
+  .service-feature-card {
+    transition:
+      transform 420ms ease,
+      box-shadow 420ms ease,
+      border-color 320ms ease;
+  }
+
+  .service-feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 28px 70px rgba(15, 23, 42, 0.28);
+  }
+
+  .service-feature-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.08) 48%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 850ms ease;
+    pointer-events: none;
+  }
+
+  .service-feature-card:hover::after {
+    transform: translateX(120%);
+  }
+
+  .service-icon-orbit {
+    animation: service-icon-float 4.8s ease-in-out infinite;
+  }
+
+  .service-process-step {
+    animation: process-pulse-in 680ms ease both;
+    animation-delay: var(--step-delay);
+  }
+
+  .service-process-step:hover > div:first-child {
+    transform: scale(1.08);
+    border-color: rgba(99, 102, 241, 0.65);
+    transition: transform 240ms ease, border-color 240ms ease;
+  }
+
+  @keyframes service-icon-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-8px) rotate(2deg);
+    }
+  }
+
+  @keyframes process-pulse-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @media (max-width: 768px) {
     .hidden-before-xs::before {
       display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-icon-orbit,
+    .service-process-step {
+      animation: none;
+    }
+
+    .service-feature-card:hover,
+    .service-feature-card:hover::after {
+      transform: none;
     }
   }
 </style>

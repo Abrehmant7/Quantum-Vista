@@ -1,0 +1,182 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Cta from "../../components/Cta.astro";
+import { getServiceHref, serviceLinks } from "../../data/services";
+
+export function getStaticPaths() {
+    return serviceLinks.map((service) => ({
+        params: { id: service.id },
+        props: { service },
+    }));
+}
+
+const { service } = Astro.props;
+const relatedServices = serviceLinks.filter((item) => item.id !== service.id);
+---
+
+<Layout title={`${service.title} - Quantum Vista`}>
+    <section class="pt-40 pb-20 bg-gray-950 relative overflow-hidden border-b border-gray-900">
+        <div class="absolute inset-0 bg-[url('/stardust.png')] opacity-20 pointer-events-none"></div>
+        <div class={`absolute -top-40 -right-32 h-[32rem] w-[32rem] rounded-full bg-gradient-to-br ${service.color} opacity-20 blur-[120px]`}></div>
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-4xl reveal-on-scroll reveal-from-left">
+                <a href="/services" class="inline-flex items-center text-sm font-bold text-indigo-400 hover:text-indigo-300 transition-colors mb-8">
+                    <span aria-hidden="true" class="mr-2">&larr;</span>
+                    All Services
+                </a>
+                <p class="text-sm font-bold uppercase tracking-widest text-indigo-400 mb-4">
+                    Service Detail
+                </p>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6">
+                    {service.title}
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-400 leading-relaxed max-w-3xl">
+                    {service.subtitle}
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gray-950">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-16 items-start">
+                <div class="reveal-on-scroll reveal-from-left">
+                    <div class="sticky top-28 rounded-[2rem] border border-gray-800 bg-gray-900/50 p-8 overflow-hidden shadow-2xl">
+                        <div class={`absolute inset-x-0 top-0 h-2 bg-gradient-to-r ${service.color}`}></div>
+                        <h2 class="text-3xl font-extrabold text-white mb-5">
+                            What We Build
+                        </h2>
+                        <p class="text-slate-400 leading-relaxed text-lg mb-8">
+                            {service.overview}
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {service.outcomes.map((outcome, index) => (
+                                <div
+                                    class="rounded-xl border border-gray-800 bg-gray-950/70 px-4 py-4 text-sm font-bold text-slate-300 reveal-on-scroll reveal-zoom"
+                                    style={`--reveal-delay: ${index * 80}ms;`}
+                                >
+                                    {outcome}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-12">
+                    <div class="reveal-on-scroll reveal-from-right">
+                        <h2 class="text-3xl font-extrabold text-white mb-6">
+                            Deliverables
+                        </h2>
+                        <div class="space-y-4">
+                            {service.deliverables.map((item, index) => (
+                                <div
+                                    class="service-detail-row relative overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/50 p-5 reveal-on-scroll"
+                                    style={`--reveal-delay: ${index * 80}ms; --tilt: ${index % 2 === 0 ? "-0.5deg" : "0.5deg"};`}
+                                >
+                                    <div class="flex items-start gap-4 relative z-10">
+                                        <div class={`mt-1 h-8 w-8 shrink-0 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center text-xs font-extrabold text-gray-950`}>
+                                            {index + 1}
+                                        </div>
+                                        <p class="text-slate-300 font-semibold leading-relaxed">
+                                            {item}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div class="reveal-on-scroll reveal-from-right">
+                        <h2 class="text-3xl font-extrabold text-white mb-6">
+                            Technology Stack
+                        </h2>
+                        <div class="flex flex-wrap gap-3">
+                            {service.stack.map((tech) => (
+                                <span class="rounded-full border border-gray-700 bg-gray-900 px-4 py-2 text-sm font-bold text-slate-300 hover:border-indigo-500/50 transition-colors">
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gray-900 border-y border-gray-800">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+                <div>
+                    <p class="text-sm font-bold uppercase tracking-widest text-indigo-400 mb-4">
+                        Explore More
+                    </p>
+                    <h2 class="text-4xl font-extrabold text-white">
+                        Related services
+                    </h2>
+                </div>
+                <a href="/contact" class="inline-flex w-max items-center rounded-md bg-indigo-600 px-5 py-3 text-sm font-bold text-white hover:bg-indigo-500 transition-colors">
+                    Start a Project
+                    <span aria-hidden="true" class="ml-2">&rarr;</span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {relatedServices.map((item, index) => (
+                    <a
+                        href={getServiceHref(item.id)}
+                        class="reveal-on-scroll reveal-zoom group rounded-2xl border border-gray-800 bg-gray-950/70 p-6 hover:border-indigo-500/50 transition-colors"
+                        style={`--reveal-delay: ${index * 70}ms;`}
+                    >
+                        <div class={`mb-5 h-2 w-24 rounded-full bg-gradient-to-r ${item.color}`}></div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-indigo-400 transition-colors">
+                            {item.title}
+                        </h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            {item.description}
+                        </p>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <Cta />
+</Layout>
+
+<style>
+    .service-detail-row {
+        transform: rotate(var(--tilt));
+        transition: transform 300ms ease, border-color 300ms ease, background-color 300ms ease;
+    }
+
+    .service-detail-row.is-visible {
+        transform: rotate(var(--tilt)) translate(0, 0) scale(1);
+    }
+
+    .service-detail-row:hover {
+        transform: rotate(0deg) translateX(8px);
+        border-color: rgba(99, 102, 241, 0.55);
+    }
+
+    .service-detail-row::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.07) 48%, transparent 70%);
+        transform: translateX(-120%);
+        transition: transform 760ms ease;
+    }
+
+    .service-detail-row:hover::after {
+        transform: translateX(120%);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .service-detail-row,
+        .service-detail-row:hover,
+        .service-detail-row.is-visible,
+        .service-detail-row:hover::after {
+            transform: none;
+        }
+    }
+</style>

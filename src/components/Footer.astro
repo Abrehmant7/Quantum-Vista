@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import logoImage from "../assets/quantum vista logo.png";
+import { getServiceHref, serviceLinks } from "../data/services";
 
 const year = new Date().getFullYear();
 ---
@@ -91,6 +92,12 @@ const year = new Date().getFullYear();
           </li>
           <li>
             <a
+              href="/portfolio"
+              class="text-slate-400 hover:text-indigo-400 transition-colors text-base"
+              >Portfolio</a>
+          </li>
+          <li>
+            <a
               href="/contact"
               class="text-slate-400 hover:text-indigo-400 transition-colors text-base"
               >Contact Us</a>
@@ -106,30 +113,16 @@ const year = new Date().getFullYear();
           Services
         </h3>
         <ul class="space-y-4">
-          <li>
-            <a
-              href="/services"
-              class="text-slate-400 hover:text-indigo-400 transition-colors text-base"
-              >Web Development</a>
-          </li>
-          <li>
-            <a
-              href="/services"
-              class="text-slate-400 hover:text-indigo-400 transition-colors text-base"
-              >App Development</a>
-          </li>
-          <li>
-            <a
-              href="/services"
-              class="text-slate-400 hover:text-indigo-400 transition-colors text-base"
-              >Digital Marketing</a>
-          </li>
-          <li>
-            <a
-              href="/services"
-              class="text-slate-400 hover:text-indigo-400 transition-colors text-base"
-              >SEO & SEM</a>
-          </li>
+          {
+            serviceLinks.map((service) => (
+              <li>
+                <a
+                  href={getServiceHref(service.id)}
+                  class="text-slate-400 hover:text-indigo-400 transition-colors text-base"
+                  >{service.navTitle}</a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 

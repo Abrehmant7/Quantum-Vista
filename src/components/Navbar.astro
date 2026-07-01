@@ -1,14 +1,25 @@
 ---
 import { Image } from "astro:assets";
 import logoImage from "../assets/quantum vista logo.png";
+import { getServiceHref, serviceLinks } from "../data/services";
 
 const pathname = Astro.url.pathname;
 const links = [
   { name: "Home", url: "/" },
-  { name: "Services", url: "/services" },
+  { name: "Portfolio", url: "/portfolio" },
   { name: "About", url: "/about" },
   { name: "Contact", url: "/contact" },
 ];
+const homeLink = links[0];
+const trailingLinks = links.slice(1);
+
+const policyLinks = [
+  { name: "Privacy Policy", url: "/privacy" },
+  { name: "Terms of Service", url: "/terms" },
+];
+
+const isPoliciesActive = policyLinks.some((link) => pathname === link.url);
+const isServicesActive = pathname.startsWith("/services");
 ---
 
 <header
@@ -32,31 +43,152 @@ const links = [
         </a>
       </div>
 
-      <!-- Desktop Menu -->
-      <nav class="hidden md:block">
-        <ul class="flex space-x-8">
-          {
-            links.map((link) => (
-              <li>
-                <a
-                  href={link.url}
-                  class:list={[
-                    "text-sm font-medium transition-colors hover:text-indigo-400",
-                    pathname === link.url
-                      ? "text-indigo-400"
-                      : "text-slate-300",
-                  ]}
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
+      <div class="hidden md:flex items-center gap-6">
+        <!-- Desktop Menu -->
+        <nav>
+          <ul class="flex items-center space-x-8">
+            <li>
+              <a
+                href={homeLink.url}
+                class:list={[
+                  "text-sm font-medium transition-colors hover:text-indigo-400",
+                  pathname === homeLink.url
+                    ? "text-indigo-400"
+                    : "text-slate-300",
+                ]}
+              >
+                {homeLink.name}
+              </a>
+            </li>
+            <li class="relative group">
+              <a
+                href="/services"
+                class:list={[
+                  "inline-flex items-center gap-1 text-sm font-medium transition-colors hover:text-indigo-400 focus:outline-none",
+                  isServicesActive ? "text-indigo-400" : "text-slate-300",
+                ]}
+              >
+                Services
+                <svg class="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </a>
+              <div class="absolute left-0 top-full pt-4 opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0">
+                <div class="w-72 rounded-xl border border-gray-800 bg-gray-950/95 p-2 shadow-2xl backdrop-blur-md">
+                  <a
+                    href="/services"
+                    class:list={[
+                      "block rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-gray-800 hover:text-white",
+                      pathname === "/services" ? "bg-gray-900 text-indigo-400" : "text-slate-300",
+                    ]}
+                  >
+                    Services Overview
+                  </a>
+                  {
+                    serviceLinks.map((service) => (
+                      <a
+                        href={getServiceHref(service.id)}
+                        class:list={[
+                          "block rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-gray-800 hover:text-white",
+                          pathname === getServiceHref(service.id)
+                            ? "bg-gray-900 text-indigo-400"
+                            : "text-slate-300",
+                        ]}
+                      >
+                        {service.navTitle}
+                      </a>
+                    ))
+                  }
+                </div>
+              </div>
+            </li>
+            {
+              trailingLinks.map((link) => (
+                <li>
+                  <a
+                    href={link.url}
+                    class:list={[
+                      "text-sm font-medium transition-colors hover:text-indigo-400",
+                      pathname === link.url
+                        ? "text-indigo-400"
+                        : "text-slate-300",
+                    ]}
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))
+            }
+            <li class="relative group">
+              <button
+                type="button"
+                class:list={[
+                  "inline-flex items-center gap-1 text-sm font-medium transition-colors hover:text-indigo-400 focus:outline-none",
+                  isPoliciesActive ? "text-indigo-400" : "text-slate-300",
+                ]}
+              >
+                Policies
+                <svg class="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div class="absolute right-0 top-full pt-4 opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0">
+                <div class="w-56 rounded-xl border border-gray-800 bg-gray-950/95 p-2 shadow-2xl backdrop-blur-md">
+                  {
+                    policyLinks.map((link) => (
+                      <a
+                        href={link.url}
+                        class:list={[
+                          "block rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-gray-800 hover:text-white",
+                          pathname === link.url
+                            ? "bg-gray-900 text-indigo-400"
+                            : "text-slate-300",
+                        ]}
+                      >
+                        {link.name}
+                      </a>
+                    ))
+                  }
+                </div>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        <button
+          type="button"
+          class="theme-toggle group relative inline-flex h-9 w-16 items-center rounded-full border border-gray-700 bg-gray-900 p-1 transition-colors hover:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-950"
+          aria-label="Switch to light mode"
+          aria-pressed="false"
+        >
+          <span class="theme-knob inline-flex h-7 w-7 translate-x-0 items-center justify-center rounded-full bg-indigo-500 text-white shadow-lg transition-transform duration-300">
+            <svg class="theme-moon h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.8A8.5 8.5 0 1111.2 3a6.5 6.5 0 009.8 9.8z"></path>
+            </svg>
+            <svg class="theme-sun hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.7-5.7l1.4-1.4M4.9 19.1l1.4-1.4m0-11.4L4.9 4.9m14.2 14.2l-1.4-1.4M12 16a4 4 0 100-8 4 4 0 000 8z"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
 
       <!-- Mobile Menu Button -->
-      <div class="md:hidden">
+      <div class="md:hidden flex items-center gap-2">
+        <button
+          type="button"
+          class="theme-toggle group relative inline-flex h-9 w-16 items-center rounded-full border border-gray-700 bg-gray-900 p-1 transition-colors hover:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          aria-label="Switch to light mode"
+          aria-pressed="false"
+        >
+          <span class="theme-knob inline-flex h-7 w-7 translate-x-0 items-center justify-center rounded-full bg-indigo-500 text-white shadow-lg transition-transform duration-300">
+            <svg class="theme-moon h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.8A8.5 8.5 0 1111.2 3a6.5 6.5 0 009.8 9.8z"></path>
+            </svg>
+            <svg class="theme-sun hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.7-5.7l1.4-1.4M4.9 19.1l1.4-1.4m0-11.4L4.9 4.9m14.2 14.2l-1.4-1.4M12 16a4 4 0 100-8 4 4 0 000 8z"></path>
+            </svg>
+          </span>
+        </button>
         <button
           id="mobile-menu-btn"
           type="button"
@@ -87,7 +219,77 @@ const links = [
   >
     <ul class="space-y-1 px-4 pb-3 pt-2 sm:px-3">
       {
-        links.map((link) => (
+        [homeLink].map((link) => (
+          <li>
+            <a
+              href={link.url}
+              class:list={[
+                "block rounded-md px-3 py-2 text-base font-medium",
+                pathname === link.url
+                  ? "bg-gray-900 text-indigo-400"
+                  : "text-slate-300 hover:bg-gray-800 hover:text-white",
+              ]}
+            >
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+      <li class="px-3 pt-3 pb-1 text-xs font-bold uppercase tracking-widest text-slate-500">
+        Services
+      </li>
+      <li>
+        <a
+          href="/services"
+          class:list={[
+            "block rounded-md px-3 py-2 text-base font-medium",
+            pathname === "/services"
+              ? "bg-gray-900 text-indigo-400"
+              : "text-slate-300 hover:bg-gray-800 hover:text-white",
+          ]}
+        >
+          Services Overview
+        </a>
+      </li>
+      {
+        serviceLinks.map((service) => (
+          <li>
+            <a
+              href={getServiceHref(service.id)}
+              class:list={[
+                "block rounded-md px-3 py-2 text-base font-medium",
+                pathname === getServiceHref(service.id)
+                  ? "bg-gray-900 text-indigo-400"
+                  : "text-slate-300 hover:bg-gray-800 hover:text-white",
+              ]}
+            >
+              {service.navTitle}
+            </a>
+          </li>
+        ))
+      }
+      {
+        trailingLinks.map((link) => (
+          <li>
+            <a
+              href={link.url}
+              class:list={[
+                "block rounded-md px-3 py-2 text-base font-medium",
+                pathname === link.url
+                  ? "bg-gray-900 text-indigo-400"
+                  : "text-slate-300 hover:bg-gray-800 hover:text-white",
+              ]}
+            >
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+      <li class="px-3 pt-3 pb-1 text-xs font-bold uppercase tracking-widest text-slate-500">
+        Policies
+      </li>
+      {
+        policyLinks.map((link) => (
           <li>
             <a
               href={link.url}
@@ -116,4 +318,38 @@ const links = [
       menu.classList.toggle("hidden");
     });
   }
+
+  const themeToggles = document.querySelectorAll(".theme-toggle");
+  const root = document.documentElement;
+
+  function syncThemeButtons() {
+    const isLight = root.classList.contains("light");
+
+    themeToggles.forEach((toggle) => {
+      const knob = toggle.querySelector(".theme-knob");
+      const moon = toggle.querySelector(".theme-moon");
+      const sun = toggle.querySelector(".theme-sun");
+
+      toggle.setAttribute("aria-pressed", String(isLight));
+      toggle.setAttribute(
+        "aria-label",
+        isLight ? "Switch to dark mode" : "Switch to light mode",
+      );
+      knob?.classList.toggle("translate-x-7", isLight);
+      knob?.classList.toggle("translate-x-0", !isLight);
+      moon?.classList.toggle("hidden", isLight);
+      sun?.classList.toggle("hidden", !isLight);
+    });
+  }
+
+  themeToggles.forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const shouldUseLight = !root.classList.contains("light");
+      root.classList.toggle("light", shouldUseLight);
+      localStorage.setItem("theme", shouldUseLight ? "light" : "dark");
+      syncThemeButtons();
+    });
+  });
+
+  syncThemeButtons();
 </script>

@@ -1,0 +1,183 @@
+---
+const industries = [
+    {
+        title: "Travel & Tourism",
+        description:
+            "Booking funnels, destination pages, CMS-managed packages, and lead-ready travel experiences.",
+        metric: "Quote journeys",
+        icon: `<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 21a9 9 0 100-18 9 9 0 000 18z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3.6 9h16.8M3.6 15h16.8M12 3c2.1 2.2 3.2 5.2 3.2 9S14.1 18.8 12 21c-2.1-2.2-3.2-5.2-3.2-9S9.9 5.2 12 3z" /></svg>`,
+        color: "from-sky-400 to-cyan-400",
+    },
+    {
+        title: "Ecommerce",
+        description:
+            "Conversion-focused storefronts, inventory sync, product discovery, and checkout optimization.",
+        metric: "Store growth",
+        icon: `<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6.5 8.5h11l-1 11h-9l-1-11z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 8.5a3 3 0 016 0" /></svg>`,
+        color: "from-emerald-400 to-teal-400",
+    },
+    {
+        title: "SaaS & Startups",
+        description:
+            "MVPs, dashboards, onboarding flows, subscription products, and scalable product foundations.",
+        metric: "MVP launches",
+        icon: `<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3l7 4v6c0 4-2.8 7-7 8-4.2-1-7-4-7-8V7l7-4z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.5 12l1.7 1.7 3.6-4" /></svg>`,
+        color: "from-indigo-400 to-violet-400",
+    },
+    {
+        title: "Professional Services",
+        description:
+            "Authority websites, CRM workflows, consultation funnels, and client communication systems.",
+        metric: "Lead capture",
+        icon: `<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 7h8M8 11h8M8 15h5" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 3h12a2 2 0 012 2v14l-4-2H6a2 2 0 01-2-2V5a2 2 0 012-2z" /></svg>`,
+        color: "from-blue-400 to-indigo-400",
+    },
+    {
+        title: "Logistics & Operations",
+        description:
+            "Inventory tools, order tracking, internal portals, automation, and reporting dashboards.",
+        metric: "Workflow clarity",
+        icon: `<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7l8-4 8 4-8 4-8-4z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 12l8 4 8-4M4 17l8 4 8-4" /></svg>`,
+        color: "from-amber-300 to-orange-400",
+    },
+    {
+        title: "Education & Training",
+        description:
+            "Learning portals, course pages, admissions funnels, resource hubs, and student dashboards.",
+        metric: "Learner journeys",
+        icon: `<svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 5l9 4-9 4-9-4 9-4z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 11.5V16c1.8 1.5 3.8 2.2 6 2.2s4.2-.7 6-2.2v-4.5" /></svg>`,
+        color: "from-rose-400 to-pink-400",
+    },
+];
+---
+
+<section class="py-24 bg-gray-950 relative overflow-hidden border-t border-gray-900">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 items-end mb-16">
+            <div>
+                <p class="text-sm font-bold uppercase tracking-widest text-indigo-400 mb-4">
+                    Industries We Serve
+                </p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                    Digital systems shaped around the way your business actually works.
+                </h2>
+            </div>
+            <p class="text-lg text-slate-400 leading-relaxed lg:max-w-2xl">
+                Whether you need a public-facing website, a booking flow, a CRM, or an internal operations app, we adapt the build around your audience, workflow, and growth model.
+            </p>
+        </div>
+
+        <div class="industry-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {
+                industries.map((industry, index) => (
+                    <article
+                        class="industry-card reveal-on-scroll reveal-zoom group relative rounded-2xl border border-gray-800 bg-gray-900/50 p-6 overflow-hidden min-h-[260px]"
+                        style={`--delay: ${index * 110}ms;`}
+                    >
+                        <div class={`industry-sheen absolute inset-px rounded-2xl bg-gradient-to-br ${industry.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                        <div class="absolute inset-0 industry-scan opacity-0 group-hover:opacity-100" />
+
+                        <div class="relative z-10 h-full flex flex-col">
+                            <div class="flex items-start justify-between gap-5 mb-8">
+                                <div class={`industry-icon w-14 h-14 rounded-xl bg-gradient-to-br ${industry.color} text-gray-950 flex items-center justify-center shadow-lg shadow-black/20`} set:html={industry.icon} />
+                                <span class="rounded-full border border-gray-700 bg-gray-950/70 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-slate-400">
+                                    {industry.metric}
+                                </span>
+                            </div>
+
+                            <h3 class="text-2xl font-bold text-white mb-3">
+                                {industry.title}
+                            </h3>
+                            <p class="text-sm text-slate-400 leading-relaxed">
+                                {industry.description}
+                            </p>
+
+                            <div class="mt-auto pt-8 flex items-center text-sm font-bold text-indigo-300">
+                                Build for this sector
+                                <span class="ml-2 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+                                    &rarr;
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .industry-card {
+        --reveal-delay: var(--delay);
+        transform-origin: center bottom;
+    }
+
+    .industry-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, transparent, rgba(129, 140, 248, 0.48), transparent);
+        opacity: 0;
+        transition: opacity 360ms ease;
+        -webkit-mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    .industry-card:hover {
+        transform: translateY(-8px);
+        transition: transform 320ms ease, border-color 320ms ease, background 320ms ease;
+        border-color: rgba(129, 140, 248, 0.45);
+        background: rgba(17, 24, 39, 0.82);
+    }
+
+    .industry-card:hover::before {
+        opacity: 1;
+    }
+
+    .industry-icon {
+        animation: industry-float 4.8s ease-in-out infinite;
+        animation-delay: var(--delay);
+    }
+
+    .industry-card:hover .industry-icon {
+        animation-duration: 1.8s;
+    }
+
+    .industry-scan {
+        background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.08) 45%, transparent 60%);
+        transform: translateX(-120%);
+        transition: transform 720ms ease;
+    }
+
+    .industry-card:hover .industry-scan {
+        transform: translateX(120%);
+    }
+
+    @keyframes industry-float {
+        0%,
+        100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-7px) rotate(2deg);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .industry-card,
+        .industry-icon {
+            animation: none;
+        }
+
+        .industry-card:hover,
+        .industry-card:hover .industry-scan {
+            transform: none;
+        }
+    }
+</style>

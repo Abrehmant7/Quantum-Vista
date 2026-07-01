@@ -4,3 +4,207 @@
     --color-primary: #4f46e5;
     --font-sans: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
+:root {
+    color-scheme: dark;
+}
+
+:root.light {
+    color-scheme: light;
+}
+
+html.light body {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+html.light .bg-gray-950,
+html.light .bg-slate-950 {
+    background-color: #f8fafc !important;
+}
+
+html.light .bg-gray-950\/95 {
+    background-color: rgba(248, 250, 252, 0.95) !important;
+}
+
+html.light .bg-gray-950\/80 {
+    background-color: rgba(248, 250, 252, 0.84) !important;
+}
+
+html.light .bg-gray-950\/70 {
+    background-color: rgba(255, 255, 255, 0.78) !important;
+}
+
+html.light .bg-gray-900,
+html.light .bg-slate-900 {
+    background-color: #ffffff !important;
+}
+
+html.light .bg-gray-900\/80 {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+html.light .bg-gray-900\/70,
+html.light .bg-gray-900\/60,
+html.light .bg-gray-900\/50,
+html.light .bg-gray-900\/40 {
+    background-color: rgba(255, 255, 255, 0.78) !important;
+}
+
+html.light .bg-gray-800 {
+    background-color: #f1f5f9 !important;
+}
+
+html.light .bg-gray-800\/60 {
+    background-color: rgba(241, 245, 249, 0.82) !important;
+}
+
+html.light .bg-indigo-950 {
+    background-color: #eef2ff !important;
+}
+
+html.light .bg-indigo-900,
+html.light .bg-blue-900,
+html.light .bg-purple-900,
+html.light .bg-slate-900 {
+    background-color: #e0e7ff !important;
+}
+
+html.light .text-white,
+html.light .text-slate-100 {
+    color: #0f172a !important;
+}
+
+html.light .text-slate-300,
+html.light .text-slate-400,
+html.light .text-gray-500 {
+    color: #475569 !important;
+}
+
+html.light .text-slate-500 {
+    color: #64748b !important;
+}
+
+html.light .text-indigo-300,
+html.light .text-indigo-400 {
+    color: #4f46e5 !important;
+}
+
+html.light .text-blue-400 {
+    color: #2563eb !important;
+}
+
+html.light .text-purple-400 {
+    color: #7c3aed !important;
+}
+
+html.light .text-emerald-400,
+html.light .text-green-400 {
+    color: #059669 !important;
+}
+
+html.light .text-yellow-400,
+html.light .text-yellow-500,
+html.light .text-amber-500 {
+    color: #d97706 !important;
+}
+
+html.light .text-pink-400 {
+    color: #db2777 !important;
+}
+
+html.light .text-orange-400 {
+    color: #ea580c !important;
+}
+
+html.light .border-gray-900,
+html.light .border-gray-800,
+html.light .border-gray-700 {
+    border-color: #dbe4ef !important;
+}
+
+html.light .border-indigo-900 {
+    border-color: #c7d2fe !important;
+}
+
+html.light .ring-slate-700 {
+    --tw-ring-color: #cbd5e1 !important;
+}
+
+html.light .hover\:bg-gray-800:hover,
+html.light .hover\:bg-gray-800\/60:hover {
+    background-color: #e2e8f0 !important;
+}
+
+html.light .hover\:text-white:hover {
+    color: #0f172a !important;
+}
+
+html.light input,
+html.light textarea {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+    color: #94a3b8;
+}
+
+html.light .shadow-2xl,
+html.light .shadow-xl,
+html.light .shadow-lg {
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08) !important;
+}
+
+html.light .theme-toggle {
+    background-color: #e2e8f0 !important;
+    border-color: #cbd5e1 !important;
+}
+
+html.light .theme-knob {
+    background-color: #f59e0b !important;
+    color: #111827 !important;
+}
+
+html.light .bg-\[url\(\'\/stardust\.png\'\)\],
+html.light .bg-\[url\(\/stardust\.png\)\] {
+    opacity: 0.08 !important;
+}
+
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+    transition:
+        opacity 700ms ease,
+        transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 300ms ease,
+        background-color 300ms ease;
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+}
+
+.reveal-on-scroll.reveal-from-left {
+    transform: translateX(-36px) scale(0.98);
+}
+
+.reveal-on-scroll.reveal-from-right {
+    transform: translateX(36px) scale(0.98);
+}
+
+.reveal-on-scroll.reveal-zoom {
+    transform: translateY(18px) scale(0.94);
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-on-scroll {
+        opacity: 1;
+        transform: none !important;
+        transition: none;
+    }
+}
